@@ -53,7 +53,7 @@ function findAllGitRepoWithChange() {
   
   for file in $(ls "${path}")
   do
-    if [[ -d "$path"/"$file" ]] && [[ "$file" != "output" ]]
+    if [[ -d $path"/"$file ]] && [[ "$file" != "output" ]] && [[ "$file" != "node_modules" ]]
     then
       findAllGitRepoWithChange "$path"/"$file"
     fi
@@ -65,7 +65,7 @@ function openTerminal() {
   do
     for app in "${apps[@]}";do
       open -a "$app" "$file" 2>/dev/null
-      if [[ $($?) == 0 ]]; then
+      if [[ $(echo $?) == 0 ]]; then
         echo "即将使用 $app.app 打开..."
         exit 0
       fi
@@ -81,7 +81,7 @@ if [ $# == 0 ]
 then
   directory=$(pwd)
 else
-  directory=$1
+  directory=$(cd "$1" || "$1";pwd)
 fi
 
 findAllGitRepoWithChange "$directory"

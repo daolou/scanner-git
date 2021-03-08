@@ -3,6 +3,7 @@ cache/
 log/
 *.swp
 .DS_Store
+pkg_modules
 
 
 
